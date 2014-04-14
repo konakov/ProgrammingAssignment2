@@ -59,17 +59,23 @@ makeCacheMatrix <- function(x = matrix()) {
 ## If the matrix is already solved, and the matrix has not changed since,
 ## return inverse form cache.
 
-
 cacheSolve <- function(x, ...) {
-        ## Return a matrix that is the inverse of 'x'
-  s <- x$getsol()
+
+  s <- x$getsol() ## look for cached solution
+
+  ## if found, return it
   if(!is.null(s)) {
     message("Found in the cache!")
     return(s)
   }
+
+  ## if not found, calculate, store and return solution
   data <- x$get()
+
   s <- solve(data, ...)
+
   x$setsol(s)
+
   s
 
 }
